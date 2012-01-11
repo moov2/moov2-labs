@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<project name="caboodle" default="default" basedir="../">
+
+  <property name="project.name" value="Labs"/>
+  <property name="project.name.lcase" value="labs"/>
+  <property name="base.dir" value="${project::get-base-directory()}" />
+  <property name="deploy.dir" value="${base.dir}/deploy" />
+  <property name="framework.version" value="net-4.0" />
+  <property name="solution.file" value="${project.name}.sln" />
+  <property name="nunit.exe" value="${base.dir}\packages\NUnit.2.5.10.11092\tools\nunit-console.exe" />
+  <property name="unit-tests.dll" value="${base.dir}/${project.name}.Tests/bin/debug/${project.name}.Tests.dll" />
+  <property name="integration-tests.dll" value="${base.dir}/${project.name}.Tests.Integration/bin/debug/${project.name}.Tests.Integration.dll" />
+  <property name="test-report.dir" value="${deploy.dir}/test-reports" />
+  <property name="mongo.service" value="Mongo DB" />
+  <property name="release.dir" value="${deploy.dir}/release" />
+  <property name="tools.dir" value="${base.dir}/build/tools" />
+  <property name="nantcontrib.dll" value="${tools.dir}/nantcontrib-0.91-rc1/libs/NAnt.Contrib.Tasks.dll" />
+  <property name="yuicompressor.jar" value="${tools.dir}/yuicompressor-2.4.6/yuicompressor-2.4.6.jar" />
+  <property name="js.src.dir" value="${base.dir}/${project.name}/Scripts/js" />
+  <property name="js.dir" value="${base.dir}/${project.name}/js" />
+  <property name="thirdpartyjs.src.dir" value="${js.src.dir}/thirdparty" />
+  <property name="css.src.dir" value="${base.dir}/${project.name}/Scripts/css" />
+  <property name="css.dir" value="${base.dir}/${project.name}/css" />
+  <property name="less.dir" value="${css.src.dir}/less" />
+  <property name="lessc.cmd" value="${tools.dir}/lessc/lessc.cmd" />
+
+  <loadtasks>
+    <fileset>
+      <include name="${nantcontrib.dll}" />
+    </fileset>
+  </loadtasks>
+
+  <!-- full production build that will build / test and release the website. -->
+  <target name="default" depends="clean, prepare, build, css, js, release" /> <!--test,--> 
+
+  <!-- 
+  convert .less to css, and then concat & minify the css & js files for improved
+  performance.
+  -->
+  <target name="scripts" depends="css, js" />
+
+  <target name="clean">
+    <echo>cleaning</echo>
+
+    <delete dir="${deploy.dir}" />
+  </target>
+
+  <target name="prepare">
+    <echo>preparing</echo>
+
+    <mkdir dir="${deploy.dir}" />
+    <mkdir dir="${test-report.dir}" />
+  </target>
+
+  <target name="build">
+    <echo>building</echo>
+
+    <exec program="${framework::get-framework-directory(framework.version)}\MSBuild.exe"
+          commandline="${solution.file} /t:Clean,Build"
+          workingdir="."
+          failonerror="true"/>
+  </target>
+
+  <target name="js">
+    <!-- 
+    optimises the third party js libraries and our own js libraries into a single file so it 
+    they can all be loaded with one script tag. Modernizr is not included because it is loaded
+    at the beginning of a web page, not at the end.
+    
+    note:
+    asis=true ensures files are concat in the order specified and not based on file name.
+    -->
+    <delete dir="${js.dir}" failonerror="false" />
+    <mkdir dir="${js.dir}" />
+    
+    <!--<concat destfile="${js.dir}/${project.name.lcase}.js">
+      <fileset>
+        <include asis="true" name="${thirdpartyjs.src.dir}/jquery-1.7.min.js" />
+      </fileset>
+    </concat>-->
+
+    <copy todir="${js.dir}">
+      <fileset basedir="${js.src.dir}">
+        <include name="*" />
+        <include name="thirdparty/*" />
+      </fileset>
+    </copy>
+
+    <!--<exec workingdir="." program="java" commandline='-jar "${yuicompressor.jar}" \-\-type js -o "${js.dir}/${project.name.lcase}.min.js" "${js.dir}/${project.name.lcase}.js"' />-->
+
+    <copy todir="${css.dir}">
+      <fileset basedir="${css.src.dir}">
+        <include name="labcss/**" />
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="css">
+    <delete dir="${css.dir}" failonerror="false" />
+    <mkdir dir="${css.dir}" />
+    
+    <!--
+    compiles .less files into .css files so they can be merged with other css files in the website.
+    --><!--
+    <exec workingdir='.' program="${lessc.cmd}" commandline='"${less.dir}/style.less" "${css.dir}/style.css"' failonerror='true' />
+
+    --><!--
+    optimises the css files by placing them into a single file and then using yuicompressor to
+    minify them decreasing load time.
+    --><!--
+
+    <concat destfile="${css.dir}/site.css">
+      <fileset>
+        <include asis="true" name="${css.src.dir}/default.css" />
+        <include asis="true" name="${css.src.dir}/colour-picker.css" />
+        <include asis="true" name="${css.src.dir}/jquery.lightbox-0.5.css" />
+        <include asis="true" name="${css.dir}/style.css" />
+      </fileset>
+    </concat>
+
+    <exec workingdir="." program="java" commandline='-jar "${yuicompressor.jar}" \-\-type css -o "${css.dir}/site.min.css" "${css.dir}/site.css"' />-->
+    
+    <copy todir="${css.dir}">
+      <fileset basedir="${css.src.dir}">
+        <include name="labcss/**" />
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="test">
+    <echo>testing</echo>
+
+    <servicecontroller action="Start" service="${mongo.service}" />
+
+    <!-- unit tests -->
+    <exec program="${nunit.exe}"
+          commandline='"${unit-tests.dll}" /xml:"${test-report.dir}/unit-tests.xml"'
+          workingdir="."
+          failonerror="true"  />
+
+    <!-- integration tests -->
+    <exec program="${nunit.exe}"
+          commandline='"${integration-tests.dll}" /xml:"${test-report.dir}/integration-tests.xml"'
+          workingdir="."
+          failonerror="true"  />
+  </target>
+
+  <target name="release">
+    <echo>releasing</echo>
+
+    <echo>re-building project to be ready for release.</echo>
+
+    <exec program="${framework::get-framework-directory(framework.version)}\MSBuild.exe"
+          commandline="${solution.file} /t:rebuild /p:Configuration=Release"
+          workingdir="."
+          failonerror="true"/>
+
+    <echo>compiling into website files. </echo>
+    <exec program="${framework::get-framework-directory(framework.version)}\aspnet_compiler.exe"
+          commandline='-c -p ${project.name} -v / "${release.dir}"'
+          workingdir="."
+          failonerror="true" />
+
+    <mkdir dir="${release.dir}/Uploads/" />
+    <echo file="${release.dir}/Uploads/README">Uploads for website go here.</echo>
+  </target>
+</project>

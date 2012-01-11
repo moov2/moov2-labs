@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-content">
+    <label for="local-text">Local Text</label><br />
+    <textarea id="local-text" name="local-text" cols="100" rows="20" placeholder="Enter some text..."></textarea>
+    <div class="local-storage-status">
+        Local Storage: <span id="local-storage-info"></span>
+    </div>
+    <script type="text/javascript" src="/js/thirdparty/jquery-1.7.min.js" language="javascript"></script>
+    <script type="text/javascript" src="/js/thirdparty/jquery.wysiwyg.js" language="javascript"></script>
+    <script type="text/javascript" src="/js/labs.global.js" language="javascript"></script>
+    <script type="text/javascript" src="/js/labs.localStorage.js" language="javascript"></script>
+</div>
