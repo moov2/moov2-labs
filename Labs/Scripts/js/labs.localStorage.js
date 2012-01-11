@@ -8,7 +8,8 @@ Labs.localStorage.initialise = function () {
     if (Labs.localStorage.isLocalStoragePage()) {
         Labs.localStorage.localText = $(Labs.localStorage.localTextSelector);
         Labs.localStorage.localText.wysiwyg({ events: {
-                keyup: Labs.localStorage.wysiwygChanged
+                keyup: Labs.localStorage.wysiwygChanged,
+                click: Labs.localStorage.wysiwygChanged
             }
         });
         Labs.localStorage.loadWysiwyg();
@@ -23,9 +24,9 @@ Labs.localStorage.isLocalStoragePage = function () {
 
 Labs.localStorage.updateStatus = function () {
     var seconds = 0;
-    if (window.localStorage.getItem('value')) {
+    if (window.localStorage.getItem('wysiwyg-text')) {
         seconds = ((new Date()).getTime() - (new Date()).setTime(window.localStorage.getItem('timestamp'))) / 1000;
-        $("#local-storage-info").html('last saved: ' + seconds + 's ago');
+        $("#local-storage-info").html('Last Saved: ' + seconds + ' seconds ago');
     }
 }
 

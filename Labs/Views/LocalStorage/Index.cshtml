@@ -1,14 +1,21 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Local Storage Demo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="main-content">
+    <h2>Local Storage Demo</h2>
     <label for="local-text">Local Text</label><br />
     <textarea id="local-text" name="local-text" cols="100" rows="20" placeholder="Enter some text..."></textarea>
     <div class="local-storage-status">
-        Local Storage: <span id="local-storage-info"></span>
+        <span id="local-storage-info"></span>
     </div>
+    <p class="demo-description">This demonstration shows a very simple implementation of local storage. 
+    Whatever you type in the editor will be saved in your web browser whenever you make any change. 
+    You can close this window whenever you want and you will see your text again when you come back to this page. 
+    No data at all is sent back to our servers and you don't need to identify yourself in any way as the 
+    content is all stored on your computer, however, if you use a different web browser or computer you 
+    will find this text box has returned to its original state.</p>
     <script type="text/javascript" src="/js/thirdparty/jquery-1.7.min.js" language="javascript"></script>
     <script type="text/javascript" src="/js/thirdparty/jquery.wysiwyg.js" language="javascript"></script>
     <script type="text/javascript" src="/js/labs.js" language="javascript"></script>
