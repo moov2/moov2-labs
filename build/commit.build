@@ -173,12 +173,16 @@
     <mkdir dir="${release.dir}/Uploads/" />
     <echo file="${release.dir}/Uploads/README">Uploads for website go here.</echo>
 
+	<!-- copies the web socket service files into the deploy folder -->
     <mkdir dir="${websocket.service.release.dir}" />
-    <copy todir="${websocket.service.release.dir}" file="${websocket.service.bin.dir}/Install.cmd" />
-    <copy todir="${websocket.service.release.dir}" file="${websocket.service.bin.dir}/Uninstall.cmd" />
-    <copy todir="${websocket.service.release.dir}" file="${websocket.service.bin.dir}/Labs.WebSocket.Service.exe" />
-    <copy todir="${websocket.service.release.dir}" file="${websocket.service.bin.dir}/Labs.WebSocket.Service.exe.config" />
+	<copy todir="${websocket.service.release.dir}">
+	    <fileset basedir="${websocket.service.bin.dir}">
+			<include name="**/**" />
+			<exclude name="*.pdb" />
+		</fileset>
+	</copy>
 	
+	<!-- copies build scripts to be run for staging & live. -->
 	<mkdir dir="${scripts.dir}" />
 	<copy todir="${scripts.dir}" file="${base.dir}/build/staging.build" />
   </target>
