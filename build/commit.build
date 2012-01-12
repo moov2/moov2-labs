@@ -13,6 +13,8 @@
   <property name="test-report.dir" value="${deploy.dir}/test-reports" />
   <property name="mongo.service" value="Mongo DB" />
   <property name="release.dir" value="${deploy.dir}/release" />
+  <property name="websocket.service.release.dir" value="${deploy.dir}/services/websocket-service" />
+  <property name="websocket.service.bin.dir" value="${base.dir}/Labs.WebSocket.Service/bin/Release" />
   <property name="tools.dir" value="${base.dir}/build/tools" />
   <property name="nantcontrib.dll" value="${tools.dir}/nantcontrib-0.91-rc1/libs/NAnt.Contrib.Tasks.dll" />
   <property name="yuicompressor.jar" value="${tools.dir}/yuicompressor-2.4.6/yuicompressor-2.4.6.jar" />
@@ -169,5 +171,11 @@
 
     <mkdir dir="${release.dir}/Uploads/" />
     <echo file="${release.dir}/Uploads/README">Uploads for website go here.</echo>
+
+    <mkdir dir="${websocket.service.release.dir}" />
+    <copy todir="${websocket.service.release.dir}" file="${websocket.service.bin.dir}/Install.cmd" />
+    <copy todir="${websocket.service.release.dir}" file="${websocket.service.bin.dir}/Uninstall.cmd" />
+    <copy todir="${websocket.service.release.dir}" file="${websocket.service.bin.dir}/Labs.WebSocket.Service.exe" />
+    <copy todir="${websocket.service.release.dir}" file="${websocket.service.bin.dir}/Labs.WebSocket.Service.exe.config" />
   </target>
 </project>
