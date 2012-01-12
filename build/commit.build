@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="caboodle" default="default" basedir="../">
+<project name="labs" default="default" basedir="../">
 
   <property name="project.name" value="Labs"/>
   <property name="project.name.lcase" value="labs"/>
