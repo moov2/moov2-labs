@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Labs.WebSocket.Service.DemoApp.Model;
 using Alchemy.Classes;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace Labs.WebSocket.Service.DemoApp
 {
@@ -59,7 +60,7 @@ namespace Labs.WebSocket.Service.DemoApp
                 return;
             }
 
-            SendToAll(new Message { Detail = message.Message, From = user.Username, Type = Message.Convo });
+            SendToAll(new Message { Detail = StripHTML(message.Message), From = user.Username, Type = Message.Convo });
         }
 
         private User GetConnectedUserByContext(UserContext context)
@@ -73,6 +74,11 @@ namespace Labs.WebSocket.Service.DemoApp
             {
                 user.Context.Send(JsonConvert.SerializeObject(response));
             }
+        }
+
+        private string StripHTML(string message)
+        {
+            return Regex.Replace(message, @"<(.|\n)*?>", string.Empty);
         }
     }
 }
