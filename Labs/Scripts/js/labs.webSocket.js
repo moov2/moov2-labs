@@ -26,9 +26,9 @@ Labs.webSocket.open = function () {
     // start the web socket.
 
     try {
-        Labs.webSocket.socket = new MozWebSocket("ws://localhost:81/");
+        Labs.webSocket.socket = new MozWebSocket("ws://labs.staging.moov2.com:81/");
     } catch (exception) {
-        Labs.webSocket.socket = new WebSocket("ws://localhost:81/");
+        Labs.webSocket.socket = new WebSocket("ws://labs.staging.moov2.com:81/");
     }
 
     Labs.webSocket.socket.onopen = function () {
