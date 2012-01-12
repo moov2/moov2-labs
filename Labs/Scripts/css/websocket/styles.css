@@ -1,0 +1,21 @@
+﻿body { color: #464646; font-size: 1.8em; margin: 50px; }
+
+#content {
+	margin: 0 auto;
+	max-width: 900px;
+}
+
+#status { display: none; margin: 10px 0 10px 0; }
+
+form { }
+	form input { padding: 8px; }
+	form input[type="text"]  { border-radius: 5px; color: #464646; width: 80%; }
+
+#send-message-form {
+	display: none;
+}
+
+ul { display: none; list-style-type: none; margin: 20px 0 0 0; padding: 0; }
+	ul li { margin: 0; padding: 0; }
+
+.activity { font-style: italic; }

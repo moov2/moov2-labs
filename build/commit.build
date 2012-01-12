@@ -34,8 +34,7 @@
   <target name="default" depends="clean, prepare, build, css, js, release" /> <!--test,--> 
 
   <!-- 
-  convert .less to css, and then concat & minify the css & js files for improved
-  performance.
+  convert .less to css, and then concat & minify the css & js files for improved performance.
   -->
   <target name="scripts" depends="css, js" />
 
@@ -123,6 +122,13 @@
     <copy todir="${css.dir}">
       <fileset basedir="${css.src.dir}">
         <include name="labcss/**" />
+      </fileset>
+    </copy>
+
+    <copy todir="${css.dir}" file="${css.src.dir}/default.css" />
+    <copy todir="${css.dir}">
+      <fileset basedir="${css.src.dir}">
+        <include name="websocket/**" />
       </fileset>
     </copy>
   </target>
