@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project name="labs" default="default" basedir="../">
+	<property name="base.dir" value="${project::get-base-directory()}" />
+	<property name="services.dir" value="${base.dir}/services/websocket-service" />
+	<property name="services.install.cmd" value="${services.dir}/Install.cmd" />
+	<property name="service.name" value="Labs.WebSocket.Service" />
+
+	<target name="default" depends="stop, install, start" />
+	
+	<target name="stop">
+		<exec 	basedir="C:\Windows\System32\"
+				program="net.exe"
+				commandline="stop ${service.name}"
+				failonerror="false" />
+	</target>
+	
+	<target name="install">
+		<exec 	basedir="${services.dir}"
+				program="Install.cmd"
+				failonerror="false" />
+	</target>
+	
+	<target name="start">
+		<exec 	basedir="C:\Windows\System32\"
+				program="net.exe"
+				commandline="start ${service.name}"
+				workingdir="."
+				failonerror="true" />
+	</target>
+</project>

@@ -25,6 +25,7 @@
   <property name="css.dir" value="${base.dir}/${project.name}/css" />
   <property name="less.dir" value="${css.src.dir}/less" />
   <property name="lessc.cmd" value="${tools.dir}/lessc/lessc.cmd" />
+  <property name="scripts.dir" value="${deploy.dir}/scripts" />
 
   <loadtasks>
     <fileset>
@@ -177,5 +178,8 @@
     <copy todir="${websocket.service.release.dir}" file="${websocket.service.bin.dir}/Uninstall.cmd" />
     <copy todir="${websocket.service.release.dir}" file="${websocket.service.bin.dir}/Labs.WebSocket.Service.exe" />
     <copy todir="${websocket.service.release.dir}" file="${websocket.service.bin.dir}/Labs.WebSocket.Service.exe.config" />
+	
+	<mkdir dir="${scripts.dir}" />
+	<copy todir="${scripts.dir}" file="${base.dir}/build/staging.build" />
   </target>
 </project>
