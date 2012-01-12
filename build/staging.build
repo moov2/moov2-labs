@@ -18,7 +18,7 @@
 		<exec 	basedir="${services.dir}"
 				program="Install.cmd"
 				failonerror="false"
-				workingdir="." />
+				workingdir="${services.dir}" />
 	</target>
 	
 	<target name="start">
