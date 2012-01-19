@@ -4,8 +4,9 @@
 	<property name="services.dir" value="${base.dir}/services/websocket-service" />
 	<property name="services.install.cmd" value="${services.dir}/Install.cmd" />
 	<property name="service.name" value="Labs.WebSocket.Service" />
+	<property name="host.services.dir" value="C:\Services\moov2-lab\Labs.WebSocket.Service\" />
 
-	<target name="default" depends="stop, install, start" />
+	<target name="default" depends="stop, move, install, start" />
 	
 	<target name="stop">
 		<exec 	basedir="C:\Windows\System32\"
@@ -13,12 +14,22 @@
 				commandline="stop ${service.name}"
 				failonerror="false" />
 	</target>
+
+	<target name="move">
+   		<mkdir dir="${host.services.dir}" />
+
+		<copy todir="${host.services.dir}">
+      		<fileset basedir="${services.dir}">
+       			<include name="**/**" />
+      		</fileset> 
+    	</copy>
+	</target>
 	
 	<target name="install">
-		<exec 	basedir="${services.dir}"
+		<exec 	basedir="${host.services.dir}"
 				program="Install.cmd"
 				failonerror="false"
-				workingdir="${services.dir}" />
+				workingdir="${host.services.dir}" />
 	</target>
 	
 	<target name="start">

@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="DemoApp\DemoWebSocketHandler.cs" />
     <Compile Include="DemoApp\Model\Message.cs" />
+    <Compile Include="DemoApp\Model\ReceivedMessage.cs" />
     <Compile Include="DemoApp\Model\User.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>

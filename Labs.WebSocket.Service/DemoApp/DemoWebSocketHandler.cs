@@ -45,11 +45,11 @@ namespace Labs.WebSocket.Service.DemoApp
             Console.WriteLine("OnReceive");
 
             var user = GetConnectedUserByContext(context);
-            dynamic message;
+            ReceivedMessage message;
 
             try
             {
-                message = JsonConvert.DeserializeObject(context.DataFrame.ToString());
+                message = JsonConvert.DeserializeObject<ReceivedMessage>(context.DataFrame.ToString());
             }
             catch { return; }
 
@@ -60,7 +60,8 @@ namespace Labs.WebSocket.Service.DemoApp
                 return;
             }
 
-            SendToAll(new Message { Detail = StripHTML(message.Message), From = user.Username, Type = Message.Convo });
+            var messageToSend = StripHTML(message.Message);
+            SendToAll(new Message { Detail = messageToSend, From = user.Username, Type = Message.Convo });
         }
 
         private User GetConnectedUserByContext(UserContext context)
