@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Doberman">
+      <HintPath>..\packages\Doberman\Doberman.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
@@ -62,6 +65,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DobermanController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalStorageController.cs" />
     <Compile Include="Controllers\WebSocketController.cs" />
@@ -88,6 +92,8 @@
     <Content Include="Scripts\js\thirdparty\jquery.wysiwyg.js" />
     <Content Include="Scripts\js\thirdparty\json2.js" />
     <Content Include="Scripts\js\thirdparty\modernizr-2.0.6.min.js" />
+    <Content Include="treats\css\styles.css" />
+    <Content Include="treats\doberman.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
