@@ -5,10 +5,53 @@
     <title>@ViewBag.Title</title>
     <link href="/css/labcss/localstorage.css" rel="stylesheet" />
     <link href="/css/labcss/jquery.wysiwyg.css" rel="stylesheet" />
+    <link href="/css/websocket/styles.css" rel="stylesheet" />
     @*<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" />*@
+
+    <link rel="Stylesheet" href="/css/site.css" />
 </head>
 
 <body>
-    @RenderBody()
+
+<div class="full-page">   
+       
+            <img src="/images/moov2_logo.png" alt="Moov2 : Bespoke software development" title="Moov2 : Bespoke software development" class="logo" width="179" height="42" />
+            
+            <img src="/images/moov2_statement.jpg" alt="Moov2 - Beautiful, usable software : Mobile development, Web development, Desktop development" title="Moov2 - Beautiful, usable software : Mobile development, Web development, Desktop development" class="statement" />
+    
+    <div class="content">
+        @RenderBody()
+    </div>
+
+    <div class="ftr">  
+        <hr />
+        <div class="contact-details">
+                    <h3>Details</h3>
+                    <hr />
+                     <div class="tel-email">
+                        <div><img src="/images/icon_phone.png" alt="Call Moov2 01202 398 380" title="Call Moov2 01202 398 380" /> <a href="tel:+441202398380" class="tel">01202 398 380</a></div>
+                        <div><img src="/images/icon_email.png" alt="Email Moov2 at info@moov2.com" title="Email Moov2 at info@moov2.com" /> <a href="mailto:info@moov2.com">info@moov2.com</a></div>
+                    </div><!-- END tel-email -->
+               
+               
+               </div>
+               <div class="contact-details">
+                   <h3>Address</h3>
+                    <hr />
+                    <br />
+            
+                    <strong>Moov2 Ltd</strong><br />
+                    Forest Business Centre,<br />
+                    Fawley Road,<br />
+                    Fawley, Southampton<br />
+                    Hampshire<br />
+                    SO45 1FJ
+
+                    
+                </div>
+        <div class="clear"> </div>
+    </div>
+
+</div>
 </body>
 </html>

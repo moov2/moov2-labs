@@ -36,6 +36,8 @@
   <!-- full production build that will build / test and release the website. -->
   <target name="default" depends="clean, prepare, build, css, js, release" /> <!--test,--> 
 
+  <target name="assets" depends="prepare, css, js" />
+ 
   <!-- 
   convert .less to css, and then concat & minify the css & js files for improved performance.
   -->
@@ -52,6 +54,7 @@
 
     <mkdir dir="${deploy.dir}" />
     <mkdir dir="${test-report.dir}" />
+    <mkdir dir="${css.dir}" />
   </target>
 
   <target name="build">
@@ -97,30 +100,12 @@
     </copy>
   </target>
 
-  <target name="css">
+  <!-- 
+  Testing using new css compiler from Moov2 website
+  target name="css">
     <delete dir="${css.dir}" failonerror="false" />
     <mkdir dir="${css.dir}" />
     
-    <!--
-    compiles .less files into .css files so they can be merged with other css files in the website.
-    --><!--
-    <exec workingdir='.' program="${lessc.cmd}" commandline='"${less.dir}/style.less" "${css.dir}/style.css"' failonerror='true' />
-
-    --><!--
-    optimises the css files by placing them into a single file and then using yuicompressor to
-    minify them decreasing load time.
-    --><!--
-
-    <concat destfile="${css.dir}/site.css">
-      <fileset>
-        <include asis="true" name="${css.src.dir}/default.css" />
-        <include asis="true" name="${css.src.dir}/colour-picker.css" />
-        <include asis="true" name="${css.src.dir}/jquery.lightbox-0.5.css" />
-        <include asis="true" name="${css.dir}/style.css" />
-      </fileset>
-    </concat>
-
-    <exec workingdir="." program="java" commandline='-jar "${yuicompressor.jar}" \-\-type css -o "${css.dir}/site.min.css" "${css.dir}/site.css"' />-->
     
     <copy todir="${css.dir}">
       <fileset basedir="${css.src.dir}">
@@ -129,6 +114,21 @@
     </copy>
 
     <copy todir="${css.dir}" file="${css.src.dir}/default.css" />
+    <copy todir="${css.dir}">
+      <fileset basedir="${css.src.dir}">
+        <include name="websocket/**" />
+      </fileset>
+    </copy>
+  </target -->
+
+  <target name="css">
+    <!--
+    compiles .less files into .css files so they can be merged with other css files in the website.
+    -->
+    
+    <exec workingdir='.' program="${lessc.cmd}" commandline='"${less.dir}/site.less" "${css.dir}/site.css"' failonerror='true' />
+    <exec workingdir="." program="java" commandline='-jar "${yuicompressor.jar}" --type css -o "${css.dir}/site.styles.min.css" "${css.dir}/site.css"' />
+
     <copy todir="${css.dir}">
       <fileset basedir="${css.src.dir}">
         <include name="websocket/**" />
