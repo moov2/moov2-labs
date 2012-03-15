@@ -152,4 +152,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>nant -buildfile:"$(SolutionDir)build\commit.build" assets</PreBuildEvent>
+  </PropertyGroup>
 </Project>
