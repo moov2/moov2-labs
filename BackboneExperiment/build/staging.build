@@ -1,0 +1,40 @@
+﻿<project default="default" basedir="../">
+
+  <property name="base.dir" value="${project::get-base-directory()}" />
+  <property name="site.dir" value="C:\Inetpub\wwwroot\labs.staging.moov2.com.backbone" />
+  <property name="apppool" value="IIS APPPOOL\labs.staging.moov2.com" />
+
+
+  <target name="default" depends="clean, deploy, site-setup" />
+
+  <!--Deletes Existing web application. Copies RC Into staging-->
+  <target name="clean">
+    <delete failonerror="true" if="${directory::exists(site.dir)}">
+      <fileset basedir="${site.dir}">
+        <include name="**/**" />
+      </fileset>
+    </delete>
+  </target>
+
+  <target name="deploy">
+    <copy todir="${site.dir}">
+      <fileset basedir="${base.dir}/deploy/">
+        <include name="**/*" />
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="site-setup">
+    <exec program="AppCmd.exe" basedir="C:\windows\system32\inetsrv" output="${base.dir}\appcmdoutput.txt">
+      <arg line="list app" />
+    </exec>
+    <loadfile file="${base.dir}\appcmdoutput.txt" property="appcmdoutput.file" />    
+    <exec program="AppCmd.exe" basedir="C:\windows\system32\inetsrv" unless="${string::contains(appcmdoutput.file, 'labs.staging.moov2.com/backbone')}">
+      <arg line="add app /site.name:labs.staging.moov2.com /path:/backbone /physicalPath:${site.dir}" />
+    </exec>
+  </target>
+
+  <target name="permissions">
+    
+  </target>
+</project>

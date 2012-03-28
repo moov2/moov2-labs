@@ -15,8 +15,12 @@ _ReSharper.*
 *.crunchsolution.local.xml
 *.crunchproject.local.xml
 deploy/
+BackboneExperiment/deploy/
 
 /Labs/css
 /Labs/js
+
+/BackboneExperiment/BackboneExperiment/css
+/BackboneExperiment/BackboneExperiment/js
 
 Uploads/
