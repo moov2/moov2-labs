@@ -18,7 +18,7 @@
 
   <target name="deploy">
     <copy todir="${site.dir}">
-      <fileset basedir="${base.dir}/deploy/">
+      <fileset basedir="${base.dir}/deploy/release/">
         <include name="**/*" />
       </fileset>
     </copy>
