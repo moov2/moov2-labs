@@ -8,7 +8,7 @@
 
   	<!-- .net project settings -->
   	<property name="solution.file" value="BackboneExperiment.sln" />
-  	<property name="framework.version" value="net-4.0" />
+  	<property name="framework.version" value="net-4.5" />
 
   	<!-- build tools. -->
   	<property name="tools.dir" value="${base.dir}build\tools" />
