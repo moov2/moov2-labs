@@ -3,21 +3,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Local Storage Demo</h2>
+<h2>Welcome to Moov2 Labs</h2>
 <hr class="main-underline" />
-<p>Here's a great description on our local storage demo
-<br/>@Html.ActionLink("Local Storage Demo", "index", "localstorage")</p>
+<p>Moov2 Labs is our playground for new ideas, experiments and technical exploration. We put this site together as we wanted somewhere we could easily share some of the smaller developments we do as part of our commitment continous learning.
+<br />View our main company site at <a href="http://moov2.com">moov2.com</a>
+</p>
 
+<article>
+    <h2>.Net MVC Boilerplate</h2>
+    <hr class="main-underline" />
+    <p>Here at Moov2 we love building software projects, and we like to think we're pretty good at it. 
+    What we're not so keen on is performing the same arduous setup process for every new project. 
+    Enter .Net MVC Boilerplate, our offering to the development community that can kickstart web development projects in seconds saving hours of setup and allows focus on key functionality not framework setup. 
+    <br/><a href="https://github.com/moov2/dotnet-mvc-boilerplate">Checkout our .Net MVC Boilerplate project on github</a></p>
+</article>
 
-<br/>
-<h2>Web Sockets Demo</h2>
-<hr class="main-underline" />
-<p>Here's a great description on our web sockets demo
-<br/>@Html.ActionLink("Web Sockets Demo", "index", "websocket")</p>
+<article>
+    <h2>HTML5 Geolocation services</h2>
+    <hr class="main-underline" />
+    <p>With the massive uptake smartphones and an increasing usage of internet on-the-go, users are accessing web applications from more locations than ever before. 
+    HTML5 introduces the <strong>Geolocation <abbr title="Application Programming Interface">API</abbr></strong> which offers the ability to detect a users location for use within applications. 
+    Whilst this is especially relevant on mobile devices (which commonly have GPS functionality), this feature is also being added to modern desktop browsers too. 
+    The ability to easily capture location data in applications opens the opportunity for significant data and reporting uses. View the simple example below to see your current location (note we're not storing any location information).
+    <br/>@Html.ActionLink("Location Demo", "index", "location")</p>
+</article>
 
+<article>
+    <h2>Local Storage Demo</h2>
+    <hr class="main-underline" />
+    <p>HTML5 introduces the ability to leverage <strong><em>Local Storage</em></strong>. Local storage enables us to store information that users work with on their computer instead of relying on storage provided by remote servers. This offers several benefits:</p>
+    <ul>
+    <li><strong>Offline working</strong> - the ability to store data locally allows users to continue working even when not connected to the web.</li>
+    <li><strong>Reduced bandwidth</strong> - no need for the sending and receiving of data that doesn't need to be stored centrally reduces bandwidth requirements and also offers performance gains.</li>
+    <li><strong>Privacy</strong> - if information doesn't need to be stored centrally users can work with web applications safe in the knowledge their data isn't being sent over the web</li>
+    </ul>
+    <p>The simple demo of local storage that we have implemented here lets the user create some formatted text using a <abbr title="What You See Is What You Get">WYSIWYG</abbr> editor and periodically, automatically, saves their creation to local storage in their browser. The content is saved whenever the user makes changes so that even if they accidentally close their window or navigate away they can still come back to it later.
+    <br/>@Html.ActionLink("Local Storage Demo", "index", "localstorage")</p>
+</article>
 
-<br/>
-<h2>Location Demo</h2>
-<hr class="main-underline" />
-<p>Here's a great description on our location demo
-<br/>@Html.ActionLink("Location Demo", "index", "location")</p>
+<article>
+    <h2>Web Sockets Demo</h2>
+    <hr class="main-underline" />
+    <p>Traditionally any frequently updated information within a web page would rely on either third party plugins or a technique known as polling where the browser would make continious requests to the server to check for any updated information.
+    This apporach is not only cumbersome but can lead to huge amounts of wasted bandwidth which can prove costly. Enter HTML5 and Websockets. Websockets provide a persistent connection to a server resource allowing instant server to client notifications without the need to keep checking for changes.
+    Below is a simple example of a real-time chat demonstrating the concept. When new messages are added a push notification is sent to all connected clients.
+    <br/>@Html.ActionLink("Web Sockets Demo", "index", "websocket")</p>
+</article>
