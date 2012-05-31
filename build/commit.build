@@ -184,6 +184,7 @@
 	
 	<!-- copies build scripts to be run for staging & live. -->
 	<mkdir dir="${scripts.dir}" />
-	<copy todir="${scripts.dir}" file="${base.dir}/build/staging.build" />
+	 <copy todir="${scripts.dir}" file="${base.dir}/build/live.build" />
+    <copy todir="${scripts.dir}" file="${base.dir}/build/staging.build" />
   </target>
 </project>
