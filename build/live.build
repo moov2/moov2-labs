@@ -4,7 +4,7 @@
 	<property name="services.dir" value="${base.dir}/services/websocket-service" />
 	<property name="services.install.cmd" value="${services.dir}/Install.cmd" />
 	<property name="service.name" value="Labs.WebSocket.Service" />
-	<property name="host.services.dir" value="C:\Services\moov2-lab\Labs.WebSocket.Service\" />
+	<property name="host.services.dir" value="D:\Services\moov2-lab\Labs.WebSocket.Service\" />
 
 	<target name="default" depends="stop, move, install, start" />
 	
