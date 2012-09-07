@@ -51,6 +51,41 @@ This will trigger the test that determines whether the users connection speed is
 
 You can view an example of the HiSrc library in action <a href="/ResponsiveImages/HiSrc">here</a>.
 
+<h3>Picturefill</h3>
 
+Picturefill is an open source solution to the responsive image problem. 
+<a href="https://github.com/scottjehl/picturefill">Hosted on Github</a>, Picturefill is a JavaScript library that uses a similiar approach to media queries with CSS to determine which image to load and display. 
+Just like CSS it will load the appropriate image for the screen size that matches the media query definition, so if the browser is resized then screen size definitions that are hit have their images loaded.
+The downside compared is that Picturefill doesn't check connection speed, so when the screen size is small, say the user is using a mobile phone, it is deemed that the lowest quality image will be used, when infact the mobile has a reasonable connection because it is connected to the Internet via Wireless.
+
+<h4>Usage</h4>
+
+Firstly your need to download <strong>picturefill.js</strong> from the Github repository. Include the JS file into the web page that your image is displayed on.
+
+<pre class="language-markup"><code>&lt;script src="/js/vendor/picturefill.js"&gt;&lt;/script&gt;</code></pre>
+
+The markup for specifying the image is a little more involved than with HiSrc. 
+Divs are used with the <strong>data-picture</strong> attribute that tells the JavaScript that this container contains the definition for a responsive image. 
+The <strong>data-alt</strong> property on the parent div will apply the value to the alt tag for the img tag that will take the place when the JavaScript kicks in. 
+Also in the example below, you can see that a fallback has been added for when the browser doesn't have JavaScript enabled.
+
+<pre class="language-markup">
+<code>&lt;div data-picture data-alt="Description of the image."&gt;
+    &lt;div data-src="/img/200x100.png"&gt;&lt;/div&gt;
+    &lt;div data-src="/img/400x200.png" data-media="(min-width: 400px)"&gt;&lt;/div&gt;
+    &lt;div data-src="/img/800x400.png" data-media="(min-width: 800px)"&gt;&lt;/div&gt;
+
+    &lt;!-- Fallback content for non-JS browsers. --&gt;
+    &lt;noscript&gt;
+        &lt;img src="/img/200x100.png" alt="Description of the image."&gt;
+    &lt;/noscript&gt;
+&lt;/div&gt;</code>
+</pre>
+
+This markup above is what may become the standard way of defining responsive images in HTML, where the first div in the example will become a <strong>picture</strong> element, and its children will be <strong>source</strong> elements. This standard is being <a href="http://www.w3.org/community/respimg/">discussed by a user group</a> and may appear in the future.
+
+<h4>Example</h4>
+
+You can view an example of Picturefill in action <a href="/ResponsiveImages/Picturefill">here</a>.
 
 

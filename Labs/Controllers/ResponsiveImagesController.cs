@@ -14,5 +14,10 @@ namespace Labs.Controllers
         {
             return View();
         }
+
+        public ActionResult Picturefill()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Picturefill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Picturefill Example</h2>
+<hr class="main-underline" />
+
+Picturefill is a JavaScript library used to handle responsive images. 
+Below is an example of the Picturefill library in action. <br /><br />
+You can read more about <a href="/ResponsiveImages">responsive images here</a>.<br /><br />
+
+<div data-picture data-alt="Description of the image.">
+    <div data-src="/images/responsive-images/200x100.png"></div>
+    <div data-src="/images/responsive-images/400x200.png" data-media="(min-width: 400px)"></div>
+    <div data-src="/images/responsive-images/800x400.png" data-media="(min-width: 800px)"></div>
+
+    <noscript>
+        <img src="/images/responsive-images/200x100.png" alt="Description of the image.">
+    </noscript>
+</div>
+
+<script src="/js/thirdparty/picturefill.js"></script>

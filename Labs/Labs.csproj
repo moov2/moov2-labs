@@ -112,6 +112,7 @@
     <Content Include="Scripts\js\thirdparty\json2.js" />
     <Content Include="Scripts\js\thirdparty\modernizr-2.0.6.min.js" />
     <Content Include="Scripts\js\labs.location.js" />
+    <Content Include="Scripts\js\thirdparty\picturefill.js" />
     <Content Include="Scripts\js\thirdparty\prism.js" />
     <Content Include="treats\css\styles.css" />
     <Content Include="treats\doberman.png" />
@@ -145,6 +146,7 @@
     <Content Include="Views\Location\Index.cshtml" />
     <Content Include="Views\ResponsiveImages\Index.cshtml" />
     <Content Include="Views\ResponsiveImages\HiSrc.cshtml" />
+    <Content Include="Views\ResponsiveImages\Picturefill.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
