@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "HiSrc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>HiSrc Example</h2>
+<hr class="main-underline" />
+
+HiSrc is a JavaScript library used to handle responsive images. 
+Below is an example of the HiSrc library in action. <br /><br />
+You can read more about <a href="/ResponsiveImages">responsive images here</a>.<br /><br />
+
+<div class="hisrc">
+    <img src="/images/responsive-images/200x100.png" data-1x="/images/responsive-images/400x200.png" data-2x="/images/responsive-images/800x400.png" class="responsive-image">
+</div>
+
+<script src="/js/thirdparty/jquery-1.8.1.min.js"></script>
+<script src="/js/thirdparty/hisrc.js"></script>
+<script src="/js/labs.responsiveImages.js"></script>

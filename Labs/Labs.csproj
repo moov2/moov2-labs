@@ -21,6 +21,10 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -75,6 +79,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalStorageController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\ResponsiveImagesController.cs" />
     <Compile Include="Controllers\WebSocketController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -82,7 +87,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\responsive-images\200x100.png" />
+    <Content Include="images\responsive-images\400x200.png" />
+    <Content Include="images\responsive-images\800x400.png" />
     <Content Include="Scripts\css\default.css" />
+    <Content Include="Scripts\css\labcss\prism.css" />
     <Content Include="Scripts\css\websockets\styles.css" />
     <Content Include="Scripts\css\labcss\jquery.wysiwyg.css" />
     <Content Include="Global.asax" />
@@ -94,12 +103,16 @@
     <Content Include="images\wysiwyg\jquery.wysiwyg.no-alpha.gif" />
     <Content Include="Scripts\js\labs.js" />
     <Content Include="Scripts\js\labs.localStorage.js" />
+    <Content Include="Scripts\js\labs.responsiveImages.js" />
     <Content Include="Scripts\js\labs.webSocket.js" />
+    <Content Include="Scripts\js\thirdparty\hisrc.js" />
     <Content Include="Scripts\js\thirdparty\jquery-1.7.min.js" />
+    <Content Include="Scripts\js\thirdparty\jquery-1.8.1.min.js" />
     <Content Include="Scripts\js\thirdparty\jquery.wysiwyg.js" />
     <Content Include="Scripts\js\thirdparty\json2.js" />
     <Content Include="Scripts\js\thirdparty\modernizr-2.0.6.min.js" />
     <Content Include="Scripts\js\labs.location.js" />
+    <Content Include="Scripts\js\thirdparty\prism.js" />
     <Content Include="treats\css\styles.css" />
     <Content Include="treats\doberman.png" />
     <Content Include="Web.config" />
@@ -130,6 +143,8 @@
   <ItemGroup>
     <None Include="Scripts\css\less\site.less" />
     <Content Include="Views\Location\Index.cshtml" />
+    <Content Include="Views\ResponsiveImages\Index.cshtml" />
+    <Content Include="Views\ResponsiveImages\HiSrc.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>HTML5 Responsive Images</h2>
+<hr class="main-underline" />
+
+About responsive images...
+
+<h3>HiSrc</h3>
+
+HiSrc is an open source solution to the responsive image problem. 
+<a href="https://github.com/teleject/hisrc">Hosted on Github</a>, HiSrc is a JQuery plugin that first loads a mobile friendly version, then checks the connection speed and browser capatabilities to see if a more appropriate image can be loaded.
+When using HiSrc you must specify three version of an image in your HTML markup, a mobile friendly version, a larger version and a high resolution version (for devices capabale of higher pixel density). 
+
+<h4>Usage</h4>
+
+Firstly your need to download <b>hisrc.js</b> from the HiSrc Github page. The web page that your image will be displayed on will require to have <a href="http://jquery.com/">JQuery</a> and hisrc.js file included.
+
+<pre class="language-markup"><code>&lt;script src="/js/vendor/jquery-1.8.2.min.js"&gt;&lt;/script&gt;
+&lt;script src="/js/vendor/hisrc.js"&gt;&lt;/script&gt;</code></pre>
+
+Now the code to specify the responsive image is similiar to how you would include an image in the usual way. 
+The difference is that you need to include a couple of extra properties that specify the URL to the alternative images.
+
+<pre class="language-markup"><code>&lt;img src="/img/200x100.png" data-1x="/img/400x200.png" data-2x="/img/800x400.png" /&gt;</code></pre>
+
+As you can probably guess, the <strong>data-1x</strong> holds the URL for the large image and <strong>data-2x</strong> has the URL for the high res image.
+
+Finally we need to tell the HiSrc library which elements should be handled. 
+This is done using JQuery selectors to target the DOM element as shown below.
+
+<pre class="language-javascript">
+<code>$(document).ready(function(){
+    $('img').hisrc(); 
+}</code>
+</pre>
+
+So the code above will target every image on the page, this isn't recommended, a better strategy would be to create a specific class that can be used to specify that an image is to he handled by HiSrc.
+
+It is also recommended to speed things up that you include the line below somewhere in your JavaScript so it can be called before the DOM ready event is fired.
+
+<pre class="language-javascript">
+<code>$.hisrc.speedTest();</code>
+</pre>
+
+This will trigger the test that determines whether the users connection speed is quick enough to load the large images.
+
+<h4>Example</h4>
+
+You can view an example of the HiSrc library in action <a href="/ResponsiveImages/HiSrc">here</a>.
+
+
+
+
