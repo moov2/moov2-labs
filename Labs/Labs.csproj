@@ -114,8 +114,6 @@
     <Content Include="Scripts\js\labs.location.js" />
     <Content Include="Scripts\js\thirdparty\picturefill.js" />
     <Content Include="Scripts\js\thirdparty\prism.js" />
-    <Content Include="treats\css\styles.css" />
-    <Content Include="treats\doberman.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
