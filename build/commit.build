@@ -34,11 +34,11 @@
   </loadtasks>
 
   <!-- full production build that will build / test and release the website. -->
-  <target name="default" depends="clean, prepare, build, css, js, release" /> <!--test,--> 
+  <target name="default" depends="clean, prepare, build, css, js, release" /> <!--test,-->
 
   <target name="assets" depends="prepare, css, js" />
- 
-  <!-- 
+
+  <!--
   convert .less to css, and then concat & minify the css & js files for improved performance.
   -->
   <target name="scripts" depends="css, js" />
@@ -61,23 +61,23 @@
     <echo>building</echo>
 
     <exec program="${framework::get-framework-directory(framework.version)}\MSBuild.exe"
-          commandline="${solution.file} /t:Clean,Build"
+          commandline='${solution.file} /t:Clean,Build /p:Platform="Any CPU" /noconsolelogger'
           workingdir="."
           failonerror="true"/>
   </target>
 
   <target name="js">
-    <!-- 
-    optimises the third party js libraries and our own js libraries into a single file so it 
+    <!--
+    optimises the third party js libraries and our own js libraries into a single file so it
     they can all be loaded with one script tag. Modernizr is not included because it is loaded
     at the beginning of a web page, not at the end.
-    
+
     note:
     asis=true ensures files are concat in the order specified and not based on file name.
     -->
     <delete dir="${js.dir}" failonerror="false" />
     <mkdir dir="${js.dir}" />
-    
+
     <!--<concat destfile="${js.dir}/${project.name.lcase}.js">
       <fileset>
         <include asis="true" name="${thirdpartyjs.src.dir}/jquery-1.7.min.js" />
@@ -100,13 +100,13 @@
     </copy>
   </target>
 
-  <!-- 
+  <!--
   Testing using new css compiler from Moov2 website
   target name="css">
     <delete dir="${css.dir}" failonerror="false" />
     <mkdir dir="${css.dir}" />
-    
-    
+
+
     <copy todir="${css.dir}">
       <fileset basedir="${css.src.dir}">
         <include name="labcss/**" />
@@ -125,7 +125,7 @@
     <!--
     compiles .less files into .css files so they can be merged with other css files in the website.
     -->
-    
+
     <exec workingdir='.' program="${lessc.cmd}" commandline='"${less.dir}/site.less" "${css.dir}/site.css"' failonerror='true' />
     <exec workingdir="." program="java" commandline='-jar "${yuicompressor.jar}" --type css -o "${css.dir}/site.styles.min.css" "${css.dir}/site.css"' />
 
@@ -160,7 +160,7 @@
     <echo>re-building project to be ready for release.</echo>
 
     <exec program="${framework::get-framework-directory(framework.version)}\MSBuild.exe"
-          commandline="${solution.file} /t:rebuild /p:Configuration=Release"
+          commandline='${solution.file} /t:rebuild /p:Platform="Any CPU" /p:Configuration=Release'
           workingdir="."
           failonerror="true"/>
 
@@ -181,7 +181,7 @@
 			<exclude name="*.pdb" />
 		</fileset>
 	</copy>
-	
+
 	<!-- copies build scripts to be run for staging & live. -->
 	<mkdir dir="${scripts.dir}" />
 	 <copy todir="${scripts.dir}" file="${base.dir}/build/live.build" />
