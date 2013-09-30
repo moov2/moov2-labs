@@ -6,23 +6,32 @@ $(document).ready(function () {
 
 Labs.offlineVideo = function () {
 
-    var blob;
-    var db = new PouchDB('offlinevideo');
+    var blob, db, request,
+        dbVersion = 1,
+        dbName = 'offlinevideodemo',
+        objectStoreName = 'offlinevideos';
 
     var addVideoToPage = function (video) {
+
         $('.js-video-container').html('<video class="js-video" style="width: 320px; height: 240px;" controls></video>');
         $('.js-video-container video').attr('src', window.URL.createObjectURL(video));
     };
 
+    var createObjectStore = function (database) {
+        database.createObjectStore(objectStoreName);
+    };
+
     var getVideoFromLocalDB = function () {
-        db.getAttachment('offline-video', '/video', function(err, res) {
-            if (res) {
-                addVideoToPage(res);
+        var transaction = db.transaction([objectStoreName], 'readwrite');
+
+        transaction.objectStore(objectStoreName).get('video').onsuccess = function (event) {
+            if (!event.target.result) {
+                getVideoFromServer();
                 return;
             }
 
-            getVideoFromServer();
-        });
+            addVideoToPage(event.target.result);
+        };
     };
 
     var getVideoFromServer = function () {
@@ -37,32 +46,40 @@ Labs.offlineVideo = function () {
 
             blob = xhr.response;
             saveVideoToLocalDB(blob);
-        }, false);
+        }, true);
 
         xhr.send();
     };
 
     var init = function () {
-        getVideoFromLocalDB();
+        request = indexedDB.open(dbName, dbVersion);
+
+        request.onupgradeneeded = function(event) {
+            createObjectStore(event.target.result)
+        };
+
+        request.onsuccess = function () {
+            db = request.result;
+
+            db.onerror = function () {
+                console.log("Error creating/accessing IndexedDB database");
+            };
+
+            getVideoFromLocalDB();
+        };
 
         $('.js-clear').on('click', function () {
-            PouchDB.destroy('offlinevideo');
+            indexedDB.deleteDatabase(dbName);
         });
 
         return;
     };
 
     saveVideoToLocalDB = function (blob) {
-        db.put({_id: 'offline-video'}, function(err, response) {
-            if (!response) {
-                $('.js-video-container').html('<p>Storing of videos is not supported in this browser.</p>');
-                return;
-            }
+        var transaction = db.transaction([objectStoreName], 'readwrite');
+        transaction.objectStore(objectStoreName).put(blob, 'video');
 
-            db.putAttachment(response.id, '/video', response.rev, blob, 'video/mp4', function (err, res) {
-                addVideoToPage(blob);
-            });
-        });
+        addVideoToPage(blob);
     };
 
     return {

@@ -1,9 +1,7 @@
 CACHE MANIFEST
 
-#VERSION
-
 CACHE:
-offlinevideo.html
+/offlinevideo.html
 
 /css/site.css
 
