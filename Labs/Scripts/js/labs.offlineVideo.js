@@ -54,6 +54,11 @@ Labs.offlineVideo = function () {
 
     saveVideoToLocalDB = function (blob) {
         db.put({_id: 'offline-video'}, function(err, response) {
+            if (!response) {
+                $('.js-video-container').html('<p>Storing of videos is not supported in this browser.</p>');
+                return;
+            }
+
             db.putAttachment(response.id, '/video', response.rev, blob, 'video/mp4', function (err, res) {
                 addVideoToPage(blob);
             });
