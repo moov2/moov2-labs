@@ -1,0 +1,30 @@
+CACHE MANIFEST
+
+#VERSION
+
+CACHE:
+offlinevideo.html
+
+/css/site.css
+
+/js/thirdparty/jquery-1.7.min.js
+/js/thirdparty/pouchdb.min.js
+/js/labs.offlineVideo.js
+
+/images/icon_phone.png
+/images/icon_email.png
+/images/moov2_website.png
+/images/moov2_logo.png
+/images/moov2_statement.jpg
+/images/bg_pixel.jpg
+/images/bg_hdr.jpg
+/images/bg_grid.jpg
+/images/bg_ftr.jpg
+/images/ftr_top_line.jpg
+
+
+# Unsure about what this file is doing? Read more in the links below.
+#
+# - http://www.html5rocks.com/en/tutorials/appcache/beginner/
+# - https://developer.mozilla.org/en-US/docs/HTML/Using_the_application_cache
+# - http://html5doctor.com/go-offline-with-application-cache/

@@ -103,6 +103,7 @@
     <Content Include="images\wysiwyg\jquery.wysiwyg.no-alpha.gif" />
     <Content Include="Scripts\js\labs.js" />
     <Content Include="Scripts\js\labs.localStorage.js" />
+    <Content Include="Scripts\js\labs.offlineVideo.js" />
     <Content Include="Scripts\js\labs.responsiveImages.js" />
     <Content Include="Scripts\js\labs.webSocket.js" />
     <Content Include="Scripts\js\thirdparty\hisrc.js" />
