@@ -5,7 +5,7 @@ NETWORK:
 http://localhost:50857/videos/offline-video-example.mp4
 
 CACHE:
-offlinevideo.html
+/offlinevideo.html
 
 /css/site.css
 
