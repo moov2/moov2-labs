@@ -21,6 +21,18 @@ Labs.offlineVideo = function () {
         database.createObjectStore(objectStoreName);
     };
 
+    var fixBinary = function (bin) {
+        var length = bin.length;
+        var buf = new ArrayBuffer(length);
+        var arr = new Uint8Array(buf);
+
+        for (var i = 0; i < length; i++) {
+            arr[i] = bin.charCodeAt(i);
+        }
+
+        return buf;
+    }
+
     var getVideoFromLocalDB = function () {
         var transaction = db.transaction([objectStoreName], 'readwrite');
 
@@ -30,7 +42,12 @@ Labs.offlineVideo = function () {
                 return;
             }
 
-            addVideoToPage(event.target.result);
+            var data = fixBinary(atob(event.target.result));
+            var blob = new Blob([data], {type: 'video/mp4'});
+
+            console.log(blob);
+
+            addVideoToPage(blob);
         };
     };
 
@@ -76,10 +93,24 @@ Labs.offlineVideo = function () {
     };
 
     saveVideoToLocalDB = function (blob) {
-        var transaction = db.transaction([objectStoreName], 'readwrite');
-        transaction.objectStore(objectStoreName).put(blob, 'video');
+        var reader = new FileReader();
 
-        addVideoToPage(blob);
+        reader.onloadend = function(e) {
+            console.log('loaded');
+            // check here if blob is supported.
+            var data = btoa(this.result);
+
+            var transaction = db.transaction([objectStoreName], 'readwrite');
+            transaction.objectStore(objectStoreName).put(data, 'video');
+
+            addVideoToPage(blob);
+        };
+
+        if (reader.readAsBinaryString) {
+            reader.readAsBinaryString(blob);
+        } else {
+            reader.readAsText(blob);
+        }
     };
 
     return {
