@@ -91,7 +91,6 @@ Labs.offlineVideo = function () {
         request = indexedDB.open(dbName, dbVersion);
 
         request.onupgradeneeded = function(event) {
-            console.log('onupgradeneeded');
             createObjectStore(event.target.result)
         };
 
