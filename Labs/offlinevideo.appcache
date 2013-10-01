@@ -1,9 +1,5 @@
 CACHE MANIFEST
 
-NETWORK:
-
-*videos/offline-video-example.mp4
-
 CACHE:
 /offlinevideo.html
 
@@ -23,6 +19,9 @@ CACHE:
 /images/bg_grid.jpg
 /images/bg_ftr.jpg
 /images/ftr_top_line.jpg
+
+NETWORK:
+*
 
 
 # Unsure about what this file is doing? Read more in the links below.
