@@ -10,7 +10,7 @@ CACHE:
 /css/site.css
 
 /js/thirdparty/jquery-1.7.min.js
-/js/thirdparty/pouchdb.min.js
+/js/thirdparty/indexedDB.polyfill.js
 /js/labs.offlineVideo.js
 
 /images/icon_phone.png
